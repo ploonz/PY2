@@ -33,15 +33,17 @@ class Book:
 
 # TODO написать класс Library
 class Library:
-    def __init__(self, books: list[Book]=[]):
+    def __init__(self, books: list[Book]=None):
+        if books is None:
+            books=[]
         if not isinstance(books, list):
             raise TypeError("Список книг должен иметь тип данных \"список\"")
         self.books = books
     def get_next_book_id(self):
-        if len(self.books) == 0:
+        if not self.books:
             return 1
         else:
-            return len(self.books)+1
+            return self.books[-1].id_ + 1
     def get_index_by_book_id(self,id:int):
         for index,item in enumerate(self.books):
             if id == item.id_:
